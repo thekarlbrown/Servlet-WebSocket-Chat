@@ -13,4 +13,13 @@
 <servlet-name>HelloWorld</servlet-name>
 <url-pattern>/Servlets/HelloWorld/*</url-pattern>
 </servlet-mapping>
+    <servlet>
+    <servlet-name>ChatServlet</servlet-name>
+    <servlet-class>MyServlets.ChatServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>ChatServlet</servlet-name>
+<url-pattern>/Servlets/ChatServlet/*</url-pattern>
+</servlet-mapping>
 </web-app>
