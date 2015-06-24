@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by TheKarlBrown on 6/23/15.
+ * Created by TheKarlBrown on 6/24/15.
  */
-public class HelloWorld extends HttpServlet {
+public class ChatWindow extends HttpServlet {
     private PrintWriter out;
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         out = response.getWriter();
         out.println("<html>");
-        htmlHead(out,new String[]{},"HelloWorld");
-        out.println("Hello, this is a servlet");
+        htmlHead(out,new String[]{},"Chat Window");
+
 
         out.println("</html>");
     }
