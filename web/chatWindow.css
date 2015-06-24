@@ -1,0 +1,52 @@
+/* CSS for the Chat Window I am creating
+   By Karl Brown ( TheKarlBrown ) 24th June 2015 */
+
+body {
+    border:10px solid chartreuse;
+    max-width: 800px;
+    max-height: 595px;
+}
+#chatbox {
+    clear: left;
+    float: left;
+    padding-left:3px;
+    margin-right: 5px;
+    margin-left: 10px;
+    width: 636px;
+    height:450px;
+    overflow: auto;
+    background-color: lightskyblue;
+}
+#userlist {
+    float: right;
+    padding-left:3px;
+    margin-left: 5px;
+    overflow: auto;
+    width:138px;
+    height:450px;
+    background-color: peachpuff;
+}
+#usermsg{
+    width:720px;
+    padding:1px 5px 1px 5px;
+    border: 1px solid black;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+#sendmsg{
+    width:60px;
+    margin-top: 10px;
+}
+#menu {
+    background-color: aqua;
+}
+
+.welcome {
+    float: left;
+    padding: 0px 0px 0px 10px;
+}
+.exit {
+    float: right;
+    padding: 0px 10px 0px 0px;
+}
+
