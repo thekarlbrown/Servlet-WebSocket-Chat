@@ -14,19 +14,29 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
+
 /**
  * ChatServlet with Socket's and Observable
- * Created by TheKarlBrown on 6/24/15.
- * Adapted from http://docstore.mik.ua/orelly/java-ent/servlet/ch10_03.htm
+ * Created by Karl Brown ( TheKarlBrown ) on 6/24/15.
  * Intended Clients are JS and Android
- * Provides a minimal chat client to illustrate an understanding of various concepts and cross-platform support
+ * Provides a minimal chat client to illustrate an understanding of various concepts and multi-platform support
  */
 public class ChatServlet extends HttpServlet implements ChatServer {
     MessageSource source = new MessageSource();
     Vector socketClients = new Vector();
+    ChatDaemon socketListener;
 
-    protected int getSocketPort() {
-        return 2426;
+    protected int getSocketPort() {  return 2426; }
+
+    /**
+     * Method starting at the beginning of Servlet creation to open socket
+     */
+    @Override
+    public void init() throws ServletException{
+        super.init();
+        // Create new Thread in attempt to open socket then search for new connections
+        socketListener = new ChatDaemon(this);
+        socketListener.start();
     }
 
     /**
