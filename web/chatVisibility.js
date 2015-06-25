@@ -7,6 +7,7 @@ function enterChatroom(){
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("loginName").innerHTML= currentText;
         document.getElementById("backdrop").style.display = "block";
+        onEntry();
     }else{
         document.getElementById("nameField").value = "Type a name with 30 characters or less that is not null";
         document.getElementById("nameField").select();

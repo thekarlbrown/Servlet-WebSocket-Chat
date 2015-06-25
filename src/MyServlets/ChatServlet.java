@@ -149,8 +149,7 @@ class MessageSink implements Observer {
         while (message == null) {
             try {
                 wait();
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
 
         // Stop informing us about new messages

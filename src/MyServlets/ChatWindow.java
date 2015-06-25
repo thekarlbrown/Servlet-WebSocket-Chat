@@ -15,7 +15,7 @@ public class ChatWindow extends HttpServlet {
         out = response.getWriter();
         out.println("<html>");
         htmlHead(out,new String[]{"/chatWindow.css"},"Chat Window");
-        javascriptAddons(out,new String[]{"/chatVisibility.js"});
+        javascriptAddons(out,new String[]{"/chatVisibility.js","/chatSocket.js"});
         chatCore(out,"www.thekarlbrown.com");
         out.println("</html>");
     }
@@ -71,7 +71,7 @@ public class ChatWindow extends HttpServlet {
         printWriter.println("<div id=\"chatBox\"> </div>");
         printWriter.println("<div id=\"userList\"> </div>");
         printWriter.println("<br style=\"clear:both;\"/>");
-        printWriter.println("<form name=\"message\" action=\"\" id=\"chatmsg\">");
+        printWriter.println("<form name=\"message\" action=\"javascript:onSendMessage()\" id=\"chatmsg\">");
         printWriter.println("<input name=\"usermsg\" type=\"text\" id=\"usermsg\" size=\"100\"/>");
         printWriter.println("<input name=\"sendmsg\" type=\"submit\" id=\"sendmsg\" value=\"Send\"/>");
         printWriter.println("</form>");
