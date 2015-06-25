@@ -61,11 +61,11 @@ public class ChatWindow extends HttpServlet {
         printWriter.println("<form name=\"loginName\" action=\"javascript:enterChatroom()\" id=\"loginForm\">");
         printWriter.println("<label for=\"nameField\">Name: </label>");
         printWriter.println("<input type=\"text\" name=\"nameField\" id=\"nameField\"/>");
-        printWriter.println("<input type=\"submit\" name=\"Enter Chat\" id=\"enterChat\" value=\"Enter Chat\"/>");
+        printWriter.println("<input type=\"submit\" name=\"Enter Chat\" id=\"enterChat\"   value=\"Enter Chat\"/>");
         printWriter.println("</form>");
         printWriter.println("<div id=\"backdrop\"> ");
         printWriter.println("<div id=\"menu\">");
-        printWriter.println("<p class=\"welcome\"> Welcome, <b></b> </p>");
+        printWriter.println("<p class=\"welcome\"> Welcome, <b id=\"loginName\"></b> </p>");
         printWriter.println("<p class=\"exit\"><a id=\"exit\" href=\"" + exitLink + "\">Quit Chat</a></p>");
         printWriter.println("</div>");
         printWriter.println("<div id=\"chatBox\"> </div>");

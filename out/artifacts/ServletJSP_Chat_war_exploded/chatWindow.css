@@ -7,7 +7,7 @@ body {
     max-height: 595px;
 }
 #backdrop {
-    /*display: none;*/
+    display: none;
 }
 
 #nameField{
