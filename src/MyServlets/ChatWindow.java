@@ -15,9 +15,18 @@ public class ChatWindow extends HttpServlet {
         out = response.getWriter();
         out.println("<html>");
         htmlHead(out,new String[]{"/chatWindow.css"},"Chat Window");
+        javascriptAddons(out,new String[]{"/chatVisibility.js"});
         chatCore(out,"www.thekarlbrown.com");
-
         out.println("</html>");
+    }
+
+    /**
+     * Loads up listed Javascript's from pre-written array
+     * @param printWriter PrintWriter to use when calling the method
+     * @param scriptLocations String[] containing links (local or external) to JS files
+     */
+    public static void javascriptAddons(PrintWriter printWriter, String[] scriptLocations){
+        for (String script : scriptLocations) {  printWriter.println("<script type=\"text/javascript\" src = \"" + script +"\"></script>");  }
     }
 
     /**
@@ -39,7 +48,6 @@ public class ChatWindow extends HttpServlet {
         for (String cssLink : cssLinks){
             printWriter.println("<link rel=\"stylesheet\" type=\"text/css\" href=\""+ cssLink + "\" >");
         }
-
         printWriter.println("</head>");
 
     }
@@ -50,6 +58,11 @@ public class ChatWindow extends HttpServlet {
      * @param exitLink Link to direct user to upon closing chat
      */
     public static void chatCore (PrintWriter printWriter, String exitLink){
+        printWriter.println("<form name=\"loginName\" action=\"javascript:enterChatroom()\" id=\"loginForm\">");
+        printWriter.println("<label for=\"nameField\">Name: </label>");
+        printWriter.println("<input type=\"text\" name=\"nameField\" id=\"nameField\"/>");
+        printWriter.println("<input type=\"submit\" name=\"Enter Chat\" id=\"enterChat\" value=\"Enter Chat\"/>");
+        printWriter.println("</form>");
         printWriter.println("<div id=\"backdrop\"> ");
         printWriter.println("<div id=\"menu\">");
         printWriter.println("<p class=\"welcome\"> Welcome, <b></b> </p>");
@@ -58,7 +71,7 @@ public class ChatWindow extends HttpServlet {
         printWriter.println("<div id=\"chatBox\"> </div>");
         printWriter.println("<div id=\"userList\"> </div>");
         printWriter.println("<br style=\"clear:both;\"/>");
-        printWriter.println("<form name=\"message\" action=\"\">");
+        printWriter.println("<form name=\"message\" action=\"\" id=\"chatmsg\">");
         printWriter.println("<input name=\"usermsg\" type=\"text\" id=\"usermsg\" size=\"100\"/>");
         printWriter.println("<input name=\"sendmsg\" type=\"submit\" id=\"sendmsg\" value=\"Send\"/>");
         printWriter.println("</form>");

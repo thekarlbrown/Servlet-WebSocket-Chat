@@ -6,6 +6,21 @@ body {
     max-width: 800px;
     max-height: 595px;
 }
+#backdrop {
+    display: none;
+}
+
+#nameField{
+    width:640px;
+    padding:1px 5px 1px 5px;
+    border: 1px solid black;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+#enterChat{
+    width:90px;
+    margin-top: 10px;
+}
 #chatbox {
     clear: left;
     float: left;
@@ -40,7 +55,6 @@ body {
 #menu {
     background-color: aqua;
 }
-
 .welcome {
     float: left;
     padding: 0px 0px 0px 10px;
