@@ -41,7 +41,7 @@ public class ChatServer {
 
     private String userList(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Session session : connectedUsers){  stringBuilder.append("\n" + session.getId() ); }
+        for (Session session : connectedUsers){  stringBuilder.append("<br>" + session.getId() ); }
         return stringBuilder.toString();
     }
 

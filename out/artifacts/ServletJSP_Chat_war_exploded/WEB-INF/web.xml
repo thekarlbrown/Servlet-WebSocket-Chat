@@ -12,6 +12,6 @@
         <servlet-name>ChatWindow</servlet-name>
         <url-pattern>/Servlets/ChatWindow</url-pattern>
     </servlet-mapping>
-    
+
 
 </web-app>
