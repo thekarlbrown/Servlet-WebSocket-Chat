@@ -3,15 +3,11 @@
  */
 var connection;
 function onEntry(){
-    connection = new WebSocket("ws://localhost:2426/Servlets/ChatServlet");
+    connection = new WebSocket("ws://localhost:8080/chat");
     connection.onmessage = function(e){
-        document.getElementById("chatbox").value=document.getElementById("chatbox").value + "<p>" +  e.data + "</p> <br>";
+        document.getElementById("chatbox").value=document.getElementById("chatbox").value + e.data + "<br>";
     }
 }
 function onSendMessage(){
-    var myRequest = new XMLHttpRequest();
-    var postRequest = "message="+document.getElementById("usermsg").value;
-    myRequest.open("POST","http://localhost:8080/Servlets/ChatServlet");
-    myRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    myRequest.send(postRequest);
+    connection.send(document.getElementById("usermsg").value);
 }

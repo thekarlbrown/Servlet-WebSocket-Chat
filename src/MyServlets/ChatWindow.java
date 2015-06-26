@@ -68,8 +68,8 @@ public class ChatWindow extends HttpServlet {
         printWriter.println("<p class=\"welcome\"> Welcome, <b id=\"loginName\"></b> </p>");
         printWriter.println("<p class=\"exit\"><a id=\"exit\" href=\"" + exitLink + "\">Quit Chat</a></p>");
         printWriter.println("</div>");
-        printWriter.println("<div id=\"chatBox\"> </div>");
-        printWriter.println("<div id=\"userList\"> </div>");
+        printWriter.println("<div id=\"chatBox\">Chat</div>");
+        printWriter.println("<div id=\"userList\">Users</div>");
         printWriter.println("<br style=\"clear:both;\"/>");
         printWriter.println("<form name=\"message\" action=\"javascript:onSendMessage()\" id=\"chatmsg\">");
         printWriter.println("<input name=\"usermsg\" type=\"text\" id=\"usermsg\" size=\"100\"/>");
