@@ -25,7 +25,10 @@ public class ChatServer {
             connectedUsers.put(session, message.substring(7));
             String currentUsers = userList();
             for (Session sessions : connectedUsers.keySet()){
-                try{ sessions.getBasicRemote().sendText("Users" + currentUsers); }
+                try{
+                    sessions.getBasicRemote().sendText("---Users---" + currentUsers);
+                    sessions.getBasicRemote().sendText(" ( " + message.substring(7) + " has entered the chat )");
+                }
                 catch (IOException e){ connectedUsers.remove(sessions); }
             }
             System.out.println(message + " has been added");
@@ -39,7 +42,16 @@ public class ChatServer {
 
     @OnClose
     public void onClose (Session session){
+        String userLeaving = connectedUsers.get(session);
         connectedUsers.remove(session);
+        String currentUsers = userList();
+        for (Session sessions : connectedUsers.keySet()){
+            try{
+                sessions.getBasicRemote().sendText("---Users---" + currentUsers);
+                sessions.getBasicRemote().sendText(" ( " + userLeaving + " has left the chat )");
+            }
+            catch (IOException e){ connectedUsers.remove(sessions); }
+        }
     }
 
 

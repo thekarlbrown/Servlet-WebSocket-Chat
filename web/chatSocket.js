@@ -8,7 +8,7 @@ function onEntry(){
         connection.send("newUser"+document.getElementById("loginName").innerHTML)
     }
     connection.onmessage = function(e){
-        if (e.data.substring(0,5).localeCompare("Users")==0){
+        if (e.data.substring(0,11).localeCompare("---Users---")==0){
             document.getElementById("userList").innerHTML = e.data;
         }else {
             document.getElementById("chatBox").innerHTML = document.getElementById("chatBox").innerHTML + e.data + "<br>";
