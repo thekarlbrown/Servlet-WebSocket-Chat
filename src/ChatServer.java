@@ -12,24 +12,28 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/chat")
 public class ChatServer {
-    private static Set<Session> connectedUsers = Collections.synchronizedSet(new HashSet<Session>());
+    private static Map<Session,String> connectedUsers = Collections.synchronizedMap(new HashMap<>());
 
     @OnOpen
     public void onOpen (Session session){
         System.out.println(session.getId() + " opened a connection");
-        connectedUsers.add(session);
-        String currentUsers = userList();
-        for (Session sessions : connectedUsers){
-            try{ sessions.getBasicRemote().sendText("Users" + currentUsers); }
-            catch (IOException e){ connectedUsers.remove(sessions); }
-        }
     }
 
     @OnMessage
     public void onMessage(String message, Session session){
-        for (Session sessions: connectedUsers){
-            try{ sessions.getBasicRemote().sendText(message); }
-            catch (IOException e){ connectedUsers.remove(sessions); }
+        if((message.length()>7)&&message.substring(0,7).equals("newUser")) {
+            connectedUsers.put(session, message.substring(7));
+            String currentUsers = userList();
+            for (Session sessions : connectedUsers.keySet()){
+                try{ sessions.getBasicRemote().sendText("Users" + currentUsers); }
+                catch (IOException e){ connectedUsers.remove(sessions); }
+            }
+            System.out.println(message + " has been added");
+        }else{
+            for (Session sessions : connectedUsers.keySet()) {
+                try {  sessions.getBasicRemote().sendText(message);}
+                catch (IOException e) {  connectedUsers.remove(sessions); }
+            }
         }
     }
 
@@ -41,7 +45,7 @@ public class ChatServer {
 
     private String userList(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Session session : connectedUsers){  stringBuilder.append("<br>" + session.getId() ); }
+        for (String username : connectedUsers.values()){  stringBuilder.append("<br>" + username ); }
         return stringBuilder.toString();
     }
 

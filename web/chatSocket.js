@@ -4,6 +4,9 @@
 var connection;
 function onEntry(){
     connection = new WebSocket("ws://localhost:8080/chat");
+    connection.onopen = function (e){
+        connection.send("newUser"+document.getElementById("loginName").innerHTML)
+    }
     connection.onmessage = function(e){
         if (e.data.substring(0,5).localeCompare("Users")==0){
             document.getElementById("userList").innerHTML = e.data;
