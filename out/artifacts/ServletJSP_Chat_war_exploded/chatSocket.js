@@ -12,10 +12,15 @@ function onEntry(){
             document.getElementById("userList").innerHTML = e.data;
         }else {
             document.getElementById("chatBox").innerHTML = document.getElementById("chatBox").innerHTML + e.data + "<br>";
+            overflowFix();
         }
     }
 }
 function onSendMessage(){
     connection.send(document.getElementById("loginName").innerHTML + ": " + document.getElementById("usermsg").value);
     document.getElementById("usermsg").value="";
+}
+function overflowFix(){
+    var element = document.getElementById("chatBox");
+    element.scrollTop = element.scrollHeight;
 }
