@@ -1,5 +1,6 @@
 /**
- * Created by TheKarlBrown on 6/24/15.
+ * Javascript Code to control when someone attempts to enter the Chatroom
+ * Created by Karl Brown (TheKarlBrown) on 6/24/15.
  */
 function enterChatroom(){
     var currentText= document.getElementById("nameField").value;
