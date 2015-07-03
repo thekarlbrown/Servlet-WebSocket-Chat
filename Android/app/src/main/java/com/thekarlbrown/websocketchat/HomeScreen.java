@@ -6,15 +6,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.neovisionaries.ws.client.WebSocket;
+import com.neovisionaries.ws.client.WebSocketAdapter;
+import com.neovisionaries.ws.client.WebSocketException;
+import com.neovisionaries.ws.client.WebSocketFactory;
+
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 
 public class HomeScreen extends Activity {
     private WebSocketClient webSocketClient;
     private String username;
+    WebSocket webSocket;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +35,26 @@ public class HomeScreen extends Activity {
         username=intent.getStringExtra("username");
         ((TextView)findViewById(R.id.welcome_text)).setText(getString(R.string.welcome_message) + " " + username);
         initiateWebSocket();
-        if(webSocketClient.getConnection().isOpen()){
-            ((TextView)findViewById(R.id.welcome_text)).setText("We are connected");
-        }
+    }
+
+
+    public void nvWebSocket() throws IOException, WebSocketException{
+        webSocket = new WebSocketFactory().createSocket("ws://98.169.82.159:8080/chat");
+        webSocket.addListener(new WebSocketAdapter(){
+            @Override
+            public void onTextMessage(WebSocket websocket, String text) {
+                if(text.substring(0,11).equals("---Users---")){
+                    updateUserList(text.substring(0,11).split("<br>",0));
+                }else{
+                    updateChatWindow(text);
+                }
+            }
+            @Override
+            public void onConnected(WebSocket websocket, Map<String, List<String>> headers) {
+                websocket.sendText("newUser"+username);
+            }
+        });
+        webSocket.connect();
     }
 
     /**
@@ -64,12 +93,6 @@ public class HomeScreen extends Activity {
             }
         };
         webSocketClient.connect();
-        try{
-            while(webSocketClient.getConnection().isConnecting()){
-                wait();
-                Log.d(null,"We aren't connected yet");
-            }
-        }catch (Exception e){}
     }
 
     /**
