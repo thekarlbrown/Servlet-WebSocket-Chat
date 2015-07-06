@@ -2,6 +2,7 @@ package com.thekarlbrown.websocketchat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class HomeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+       setContentView(R.layout.activity_home_screen);
         Intent intent = getIntent();
         username=intent.getStringExtra("username");
         ((TextView)findViewById(R.id.welcome_text)).setText(getString(R.string.welcome_message) + " " + username);
